@@ -1,0 +1,73 @@
+type Hashrate_day {
+	id: Int
+	time: String
+	hashrate: Float
+	reject: Float
+	createdAt: String
+	updatedAt: String
+	asicId: ID
+}
+
+type Hashrate_hour {
+	id: Int
+	time: String
+	hashrate: Float
+	reject: Float
+	createdAt: String
+	updatedAt: String
+	asicId: ID
+}
+type asic {
+	id: ID
+	workerId: String
+	name: String
+	serial: String
+	hashrate_day: [Hashrate_day!]
+	hashrate_hour: [Hashrate_hour!]
+	rejectRate: Float
+	lastShareTime: String
+	model: Int
+	status: Int
+	createdAt: String
+	updatedAt: String
+	ClientId: Int
+}
+scalar username
+scalar password
+type client {
+	id: ID!
+	username: String!
+	password: String!
+	surname: String!
+	name: String!
+	patronymic: String!
+	phone: String
+	date_create: String
+	binanceApiKey: String
+	binanceApiSecret: String
+	binanceSubName: String
+	asic: [asic]
+}
+type admin {
+	id: ID!
+	username: String!
+	password: String!
+	surname: String!
+	name: String!
+	patronymic: String!
+}
+type error {
+	errorType: String!
+	errorNo: String!
+	errorText: String!
+}
+
+union userUnion = admin | client | error
+
+type Query {
+	asic(ClientId: ID, id: ID): [asic]
+	hashrate_day(asicId: ID!): [Hashrate_day]
+	hashrate_hour(asicId: ID!): [Hashrate_hour]
+	client(id: ID): [client]
+	user(username: username!, password: password!): userUnion
+}

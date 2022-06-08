@@ -1,0 +1,10 @@
+{
+	"version": 2,
+	"projects": {
+		"api": "apps/api",
+		"jwt": "libs/jwt",
+		"redcrypto": "apps/redcrypto",
+		"redux": "libs/redux",
+		"ui-components": "libs/ui-components"
+	}
+}
